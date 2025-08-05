@@ -26,4 +26,21 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
+  // Add this override for test files
+  {
+    files: [
+      '**/*.test.js',
+      '**/*.test.jsx',
+      '**/*.spec.js',
+      '**/*.spec.jsx',
+      '**/setupTests.js',
+    ],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.jest,
+        ...globals.node, // Add this line
+      },
+    },
+  },
 ]);

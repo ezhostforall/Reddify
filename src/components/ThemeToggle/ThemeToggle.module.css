@@ -1,0 +1,7 @@
+.themeToggleButton {
+  cursor: pointer;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: inherit;
+}

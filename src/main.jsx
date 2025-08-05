@@ -2,15 +2,21 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from './context/ThemeProvider.jsx';
+import { LevelProvider } from './context/LevelProvider.jsx';
 
-import store from './features/app/store.js';
+import store from './app/store.js';
 import router from './router.jsx';
 import './index.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    <ThemeProvider>
+      <Provider store={store}>
+        <LevelProvider>
+          <RouterProvider router={router} />
+        </LevelProvider>
+      </Provider>
+    </ThemeProvider>
   </StrictMode>
 );

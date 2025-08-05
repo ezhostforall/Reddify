@@ -1,8 +1,11 @@
+import Heading from '../../components/Heading/Heading';
+import Section from '../../components/Section/Section';
+
 export default function Post() {
   return (
-    <div>
-      <h1>This is a post page</h1>
+    <Section>
+      <Heading>This is a post page</Heading>
       <p>Content of the post will go here.</p>
-    </div>
+    </Section>
   );
 }

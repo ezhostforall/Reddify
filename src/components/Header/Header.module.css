@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4);
+  background-color: var(--surface);
+  color: var(--text);
+  transition: var(--transition);
+}
+
+.textLogo {
+  font-size: var(--text-h4);
+  font-weight: bold;
+  color: var(--primary-500);
+  text-decoration: none;
+  text-shadow: var(--text-shadow-dark);
+  transition: var(--transition);
+}
+
+.logoAccent {
+  color: var(--primary-700);
+}
+
+.textLogo:hover {
+  color: var(--primary-700);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}

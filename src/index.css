@@ -1,0 +1,212 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Shared Tokens (Color-independent) */
+
+  /* Brand Colors (Apple Blue) */
+  --primary-50: #eaf3fb;
+  --primary-100: #d2e6fa;
+  --primary-300: #5ac8fa;
+  --primary-500: #007aff; /* Main Brand (iOS Blue) */
+  --primary-700: #004080;
+  --primary-900: #002147;
+
+  /* Utility Colors (Apple System Colors) */
+  --secondary-color: #8e8e93; /* systemGray */
+  --secondary-color-hover: #636366; /* systemGray2 */
+  --success-color: #34c759; /* systemGreen */
+  --success-color-hover: #248a3d;
+  --danger-color: #ff3b30; /* systemRed */
+  --danger-color-hover: #b3261e;
+  --warning-color: #ffcc00; /* systemYellow */
+  --warning-color-hover: #b38f00;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(60, 60, 67, 0.03);
+  --shadow-sm: 0 1px 3px rgba(60, 60, 67, 0.07);
+  --shadow-md:
+    0 4px 6px rgba(60, 60, 67, 0.1), 0 1px 3px rgba(60, 60, 67, 0.06);
+  --shadow-lg:
+    0 10px 15px rgba(60, 60, 67, 0.12), 0 4px 6px rgba(60, 60, 67, 0.08);
+  --shadow-xl:
+    0 20px 25px rgba(60, 60, 67, 0.14), 0 10px 10px rgba(60, 60, 67, 0.1);
+
+  --text-shadow-light: 0 1px 3px rgba(255, 255, 255, 0.1);
+  --text-shadow-dark: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+  /* Transitions */
+  --transition: all 0.3s ease-in-out;
+
+  /* Spacing Scale (Golden Ratio) */
+  --space-0: 0rem;
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.375rem; /* 6px */
+  --space-3: 0.625rem; /* 10px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.625rem; /* 26px */
+  --space-6: 2.625rem; /* 42px */
+  --space-7: 4.25rem; /* 68px */
+  --space-8: 6.875rem; /* 110px */
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 1.75;
+
+  /* Font Sizes (Responsive Golden Ratio with clamp) */
+  --text-h1: clamp(3rem, 2vw + 2rem, 3.75rem); /* ~48–60px */
+  --text-h2: clamp(2.75rem, 1vw + 2rem, 3.25rem); /* ~44–52px */
+  --text-h3: clamp(2rem, 0.8vw + 1.5rem, 2.5rem); /* ~32–40px */
+  --text-h4: clamp(1.5rem, 0.5vw + 1rem, 1.75rem); /* ~24–28px */
+  --text-h5: clamp(1rem, 0.2vw + 0.9rem, 1.125rem); /* ~16–18px */
+  --text-h6: clamp(0.75rem, 0.1vw + 0.7rem, 0.875rem); /* ~12–14px */
+
+  --text-base: clamp(0.75rem, 1vw + 0.5rem, 1rem); /* Responsive paragraph */
+  --text-lead: clamp(1rem, 1.2vw + 1rem, 1.5rem); /* Intro/lead text */
+  --text-small: clamp(0.625rem, 0.5vw + 0.4rem, 0.75rem); /* Metadata/small */
+
+  /* Borders */
+  --bordercolor: var(--surface-inverse);
+  --border-radius: var(--space-1); /* 4px */
+  --border-width: 1px;
+  --border: var(--border-width) solid var(--bordercolor);
+
+  /* Typography Defaults */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: var(--leading-normal);
+  font-weight: 400;
+
+  /* UX Refinement */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-theme='light'] {
+  --text: #1c1c1e; /* system label */
+  --text-inverse: #f2f2f7;
+  --muted: #8e8e93; /* systemGray */
+  --bg: #f2f2f7; /* systemGroupedBackground */
+  --bg-inverse: #1c1c1e;
+  --surface: #ffffff; /* systemBackground */
+  --surface-inverse: #2c2c2e;
+
+  a:hover {
+    color: var(--primary-700);
+  }
+}
+
+[data-theme='dark'] {
+  --text: #f2f2f7;
+  --text-inverse: #1c1c1e;
+  --muted: #8e8e93;
+  --bg: #1c1c1e; /* systemBackground dark */
+  --bg-inverse: #f2f2f7;
+  --surface: #2c2c2e; /* secondarySystemBackground dark */
+  --surface-inverse: #ffffff;
+
+  --shadow-xs: 0 1px 2px rgba(255, 255, 255, 0.05);
+  --shadow-sm: 0 1px 3px rgba(255, 255, 255, 0.08);
+  --shadow-md:
+    0 4px 6px rgba(255, 255, 255, 0.08), 0 1px 3px rgba(255, 255, 255, 0.05);
+  --shadow-lg:
+    0 10px 15px rgba(255, 255, 255, 0.1), 0 4px 6px rgba(255, 255, 255, 0.05);
+  --shadow-xl:
+    0 20px 25px rgba(255, 255, 255, 0.12), 0 10px 10px rgba(255, 255, 255, 0.05);
+
+  a:hover {
+    color: var(--primary-300);
+  }
+}
+
+a {
+  color: var(--primary-500); /* Main brand color */
+}
+
+a:hover {
+  color: var(--primary-700); /* Hover variant of brand color */
+}
+
+a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--text);
+  background-color: var(--bg) !important;
+  transition: var(--transition);
+}
+
+main {
+  min-height: calc(100vh - 12rem);
+}
+
+section {
+  max-width: 100%;
+  padding: var(--space-4);
+  margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 auto;
+  width: 100%;
+}
+
+h1 {
+  font-size: var(--text-h1);
+  line-height: var(--leading-tight);
+}
+
+h2 {
+  font-size: var(--text-h2);
+  line-height: var(--leading-tight);
+}
+
+h3 {
+  font-size: var(--text-h3);
+  line-height: var(--leading-tight);
+}
+
+h4 {
+  font-size: var(--text-h4);
+  line-height: var(--leading-tight);
+}
+
+h5 {
+  font-size: var(--text-h5);
+  line-height: var(--leading-tight);
+}
+
+h6 {
+  font-size: var(--text-h6);
+  line-height: var(--leading-tight);
+}
+
+p {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding-left: var(--space-4);
+  margin: var(--space-4) 0;
+}

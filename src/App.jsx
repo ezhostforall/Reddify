@@ -1,17 +1,15 @@
 import { Outlet } from 'react-router';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
     <>
-      <header>
-        <h1>Reddify</h1>
-      </header>
+      <Header />
       <main>
         <Outlet />
       </main>
-      <footer>
-        <p>&copy; 2023 Reddify</p>
-      </footer>
+      <Footer />
     </>
   );
 }

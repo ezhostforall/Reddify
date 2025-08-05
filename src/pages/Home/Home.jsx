@@ -1,7 +1,10 @@
+import Heading from '../../components/Heading/Heading';
+import Section from '../../components/Section/Section';
+
 export default function Home() {
   return (
-    <div>
-      <h1>This will be the main feed</h1>
-    </div>
+    <Section>
+      <Heading>This will be the main feed</Heading>
+    </Section>
   );
 }
