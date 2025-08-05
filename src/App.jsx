@@ -1,7 +1,19 @@
-
+import { Outlet } from 'react-router';
 
 function App() {
-  return <p>Hello</p>
+  return (
+    <>
+      <header>
+        <h1>Reddify</h1>
+      </header>
+      <main>
+        <Outlet />
+      </main>
+      <footer>
+        <p>&copy; 2023 Reddify</p>
+      </footer>
+    </>
+  );
 }
 
-export default App
+export default App;
