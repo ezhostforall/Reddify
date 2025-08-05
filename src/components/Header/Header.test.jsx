@@ -9,6 +9,6 @@ describe('Header', () => {
         <Header />
       </MemoryRouter>
     );
-    expect(screen.getByText(/redd/i)).toBeInTheDocument();
+    expect(screen.getByText(/red/i)).toBeInTheDocument();
   });
 });

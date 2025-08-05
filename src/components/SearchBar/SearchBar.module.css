@@ -1,0 +1,38 @@
+.searchBar {
+  display: flex;
+  align-items: stretch; /* ensures both input and button have the same height */
+  width: 100%;
+}
+
+.searchInput {
+  flex: 1;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: var(--border-radius-full);
+  border-bottom-left-radius: var(--border-radius-full);
+  border-right: none; /* removes double border between input and button */
+  padding: var(--space-3) var(--space-4);
+  border: var(--border);
+  background-color: var(--surface);
+  color: var(--text);
+  
+}
+
+.searchButton {
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--primary-500);
+  color: var(--text-inverse);
+  border: var(--border);
+  border-left: none; /* removes double border between input and button */
+  border-top-right-radius: var(--border-radius-full);
+  border-bottom-right-radius: var(--border-radius-full);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.searchButton:hover {
+  background-color: var(--primary-700);
+}

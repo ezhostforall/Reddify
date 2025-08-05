@@ -1,12 +1,14 @@
 import styles from './Header.module.css';
 import { NavLink } from 'react-router';
+import SearchBar from '../SearchBar/SearchBar';
 
 export default function Header() {
   return (
     <header className={styles.header}>
       <p className={styles.textLogo}>
-        Redd<span className={styles.logoAccent}>ify</span>
+        Red<span className={styles.logoAccent}>dify</span>
       </p>
+      <SearchBar />
       <nav className={styles.nav}>
         <NavLink to="/" className={styles.navLink}>
           Home

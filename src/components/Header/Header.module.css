@@ -5,7 +5,8 @@
   padding: var(--space-4);
   background-color: var(--surface);
   color: var(--text);
-  transition: var(--transition);
+  
+  gap: var(--space-6);
 }
 
 .textLogo {
@@ -14,15 +15,15 @@
   color: var(--primary-500);
   text-decoration: none;
   text-shadow: var(--text-shadow-dark);
-  transition: var(--transition);
+  
 }
 
 .logoAccent {
-  color: var(--primary-700);
+  color: var(--text);
 }
 
 .textLogo:hover {
-  color: var(--primary-700);
+  transform: scale(1.05);
 }
 
 .nav {

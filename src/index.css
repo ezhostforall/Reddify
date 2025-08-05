@@ -74,6 +74,7 @@
   /* Borders */
   --bordercolor: var(--surface-inverse);
   --border-radius: var(--space-1); /* 4px */
+  --border-radius-full: 9999px; /* Full border radius for circles */
   --border-width: 1px;
   --border: var(--border-width) solid var(--bordercolor);
 
