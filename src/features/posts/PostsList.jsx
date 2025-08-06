@@ -1,60 +1,69 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router';
-import { fetchSubredditPosts } from './postsAPI';
+import { useLoaderData, useNavigate, useLocation } from 'react-router';
+import { useState, useEffect } from 'react';
 import Section from '../../components/Section/Section';
-import Div from '../../components/Div/Div';
-import Heading from '../../components/Heading/Heading';
 import PostItem from './PostItem';
 import styles from './posts.module.css';
 
-export default function PostsList({ subreddit = 'all' }) {
-  const [posts, setPosts] = useState([]);
-  const [after, setAfter] = useState('');
-  const [loading, setLoading] = useState(true);
+export default function PostsList() {
+  const { posts, after } = useLoaderData();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [allPosts, setAllPosts] = useState(posts);
+  const [currentAfter, setCurrentAfter] = useState(after);
+  const [loading, setLoading] = useState(false);
 
+  // Update accumulated posts when new data comes from loader
   useEffect(() => {
-    setLoading(true);
-    fetchSubredditPosts(subreddit, 'hot', 10, '')
-      .then(data => {
-        setPosts(data.children);
-        setAfter(data.after);
-      })
-      .catch(err => {
-        console.error('Failed to fetch posts:', err);
-      })
-      .finally(() => setLoading(false));
-  }, [subreddit]);
+    const urlParams = new URLSearchParams(location.search);
+    const isLoadMore = urlParams.has('after');
+    
+    if (isLoadMore) {
+      // Append new posts to existing ones
+      setAllPosts(prev => [...prev, ...posts]);
+    } else {
+      // Fresh load, replace all posts
+      setAllPosts(posts);
+    }
+    setCurrentAfter(after);
+  }, [posts, after, location.search]);
 
-  const loadMorePosts = () => {
-    if (!after) return;
+  const loadMorePosts = async () => {
     setLoading(true);
-    fetchSubredditPosts(subreddit, 'hot', 10, after)
-      .then(data => {
-        setPosts(prevPosts => [...prevPosts, ...data.children]);
-        setAfter(data.after);
-      })
-      .catch(err => {
-        console.error('Failed to load more posts:', err);
-      })
-      .finally(() => setLoading(false));
+    try {
+      const params = new URLSearchParams(location.search);
+      params.set('after', currentAfter);
+      
+      await navigate(`${location.pathname}?${params.toString()}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  if (loading && posts.length === 0) return <p>Loading posts...</p>;
+  if (!allPosts || allPosts.length === 0) {
+    return (
+      <Section>
+        <p>No posts available.</p>
+      </Section>
+    );
+  }
 
   return (
     <>
       <Section variant='left-aligned-flex' className={styles.postsFeed}> 
-        {posts.map(({ data: post }) => (
+        {allPosts.map(({ data: post }) => (
           <PostItem key={post.id} post={post} />
         ))}
       </Section>
       <Section>
-        {after && (
+        {currentAfter && (
           <button type="button" onClick={loadMorePosts} disabled={loading}>
             {loading ? 'Loading...' : 'Load More Posts'}
           </button>
         )}
-      {!after && posts.length > 0 && <p>No more posts to load.</p>}
+        <button type="button" onClick={() => window.scrollTo(0, 0)}>
+          Back to top
+        </button>
+        {!currentAfter && allPosts.length > 0 && <p>No more posts to load.</p>}
       </Section>
     </>
   );

@@ -13,6 +13,7 @@
   padding: var(--space-4);
   box-shadow: var(--shadow);
   border: var(--border);
+  border-radius: var(--border-radius)
 }
 
 .video {
@@ -29,4 +30,41 @@
   object-fit: cover;
   max-width: 100%;
   border-radius: var(--radius);
+}
+
+.postMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.metaText {
+  color: var(--muted);
+  font-size: var(--text-small);
+}
+
+.postTitle {
+  font-size: var(--text-h4);
+  color: var(--text);
+  margin-bottom: var(--space-2);
+}
+
+.viewPostLink {
+  display: block;
+  margin-top: var(--space-4);
+  width: 100%;
+  color: var(--primary-50);
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  transition: color var(--transition);
+  background-color: var(--primary-500);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--border-radius);
+}
+
+.viewPostLink:hover {
+  color: var(--primary-900);
+  background-color: var(--primary-50);
 }

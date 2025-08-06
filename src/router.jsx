@@ -3,6 +3,7 @@ import App from './App.jsx';
 import Home from './pages/Home/Home.jsx';
 import Post from './pages/Post/Post.jsx';
 import Search from './pages/Search/Search.jsx';
+import { postsListLoader, postDetailsLoader } from './features/posts/postsAPI.js';
 
 export const router = createBrowserRouter([
   {
@@ -12,10 +13,12 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+        loader: postsListLoader,
       },
       {
         path: 'post/:postId',
         element: <Post />,
+        loader: postDetailsLoader,
       },
       {
         path: 'search',

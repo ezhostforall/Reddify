@@ -17,3 +17,23 @@ export async function fetchPostDetails(postId) {
   const json = await response.json();
   return json[0].data.children[0].data; // Returns the post details
 }
+
+export async function postsListLoader({ params, request }) {
+  const url = new URL(request.url);
+  const after = url.searchParams.get('after') || '';
+  const subreddit = params.subreddit || 'all';
+  
+  console.log('Loading posts with after:', after); // Debug log
+  
+  const data = await fetchSubredditPosts(subreddit, 'hot', 10, after);
+  return { posts: data.children, after: data.after, subreddit };
+}
+
+export async function postDetailsLoader({ params }) {
+  const postId = params.postId;
+  if (!postId) {
+    throw new Error('Post ID is required');
+  }
+  const postDetails = await fetchPostDetails(postId);
+  return { post: postDetails };
+}

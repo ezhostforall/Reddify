@@ -18,11 +18,14 @@ export default function PostItem({ post }) {
           className={styles.image}
         />
       ) : null}
-      <Heading>{post.title}</Heading>
-      <p>Posted by u/{post.author}</p>
-      <p>👍 {post.score} | 💬 {post.num_comments}</p>
+      <Heading className={styles.postTitle}>{post.title}</Heading>
+      <Div className={styles.postMeta}>
+        <p className={styles.metaText}>Posted by u/{post.author}</p>
+        <p className={styles.metaText}>👍 {post.score} | 💬 {post.num_comments}</p>
+      </Div>
       <Link
         to={`post/${post.id}`}
+        className={styles.viewPostLink}
       >
         View post →
       </Link>
