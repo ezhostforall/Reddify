@@ -2,8 +2,8 @@ import { useLoaderData, useSearchParams, useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import Heading from '../../components/Heading/Heading';
 import Section from '../../components/Section/Section';
-import PostItem from '../../features/posts/PostItem';
-import styles from '../../features/posts/posts.module.css';
+import Button from '../../components/Button/Button';
+import PostsList from '../../features/posts/PostsList';
 
 export default function Search() {
   const { posts, after, query, error } = useLoaderData();
@@ -15,9 +15,8 @@ export default function Search() {
 
   useEffect(() => {
     const isLoadMore = searchParams.has('after');
-    
     if (isLoadMore) {
-      setAllPosts(prev => [...prev, ...posts]);
+      setAllPosts((prev) => [...prev, ...posts]);
     } else {
       setAllPosts(posts);
     }
@@ -29,7 +28,6 @@ export default function Search() {
     try {
       const params = new URLSearchParams(searchParams);
       params.set('after', currentAfter);
-      
       await navigate(`/search?${params.toString()}`);
     } finally {
       setLoading(false);
@@ -56,35 +54,25 @@ export default function Search() {
 
   return (
     <>
+      <PostsList
+        title={`Search Results for "${query}"`}
+        showFilter={false}
+        posts={allPosts}
+        after={currentAfter}
+        loading={loading}
+        onLoadMore={loadMoreResults}
+        noMoreText="No more results to load."
+        showCount
+      />
       <Section>
-        <Heading>Search Results for "{query}"</Heading>
-        <p>{allPosts.length} results found</p>
+        <Button
+          variant="backToTop"
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          ˄
+        </Button>
       </Section>
-      
-      {allPosts.length > 0 ? (
-        <>
-          <Section variant='left-aligned-flex' className={styles.postsFeed}>
-            {allPosts.map(({ data: post }) => (
-              <PostItem key={post.id} post={post} />
-            ))}
-          </Section>
-          <Section>
-            {currentAfter && (
-              <button type="button" onClick={loadMoreResults} disabled={loading}>
-                {loading ? 'Loading...' : 'Load More Results'}
-              </button>
-            )}
-            <button type="button" onClick={() => window.scrollTo(0, 0)}>
-              Back to top
-            </button>
-            {!currentAfter && allPosts.length > 0 && <p>No more results to load.</p>}
-          </Section>
-        </>
-      ) : (
-        <Section>
-          <p>No posts found for "{query}". Try a different search term.</p>
-        </Section>
-      )}
     </>
   );
 }

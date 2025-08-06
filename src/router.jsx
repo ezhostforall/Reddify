@@ -4,7 +4,11 @@ import Home from './pages/Home/Home.jsx';
 import Post from './pages/Post/Post.jsx';
 import Search from './pages/Search/Search.jsx';
 import Settings from './pages/Settings/Settings.jsx';
-import { postsListLoader, postDetailsLoader, searchLoader } from './features/posts/postsAPI.js';
+import {
+  postsListLoader,
+  postDetailsLoader,
+  searchLoader,
+} from './features/posts/postsAPI.js';
 
 export const router = createBrowserRouter([
   {

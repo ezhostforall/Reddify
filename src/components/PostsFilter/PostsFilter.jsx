@@ -4,39 +4,41 @@ import { updatePreferences } from '../../features/user/userSlice';
 import Div from '../Div/Div';
 import styles from './PostsFilter.module.css';
 
-export default function PostsFilter({ 
-  showSortOptions = true, 
+export default function PostsFilter({
+  showSortOptions = true,
   showLimitOptions = true,
-  className = ''
+  className = '',
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { postsPerPage, defaultSort } = useSelector(state => state.user.preferences);
+  const { postsPerPage, defaultSort } = useSelector(
+    (state) => state.user.preferences
+  );
 
   const handleSortChange = (newSort) => {
     // Update Redux preferences
     dispatch(updatePreferences({ defaultSort: newSort }));
-    
+
     // Update URL immediately for instant feedback
     const params = new URLSearchParams(location.search);
     params.set('sort', newSort);
     params.delete('after'); // Reset pagination when changing sort
-    
+
     navigate(`${location.pathname}?${params.toString()}`, { replace: true });
   };
 
   const handleLimitChange = (newLimit) => {
     const limit = parseInt(newLimit);
-    
+
     // Update Redux preferences
     dispatch(updatePreferences({ postsPerPage: limit }));
-    
+
     // Update URL immediately for instant feedback
     const params = new URLSearchParams(location.search);
     params.set('limit', limit);
     params.delete('after'); // Reset pagination when changing limit
-    
+
     navigate(`${location.pathname}?${params.toString()}`, { replace: true });
   };
 

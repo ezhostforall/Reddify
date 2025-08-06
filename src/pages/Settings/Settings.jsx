@@ -2,16 +2,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updatePreferences } from '../../features/user/userSlice';
 import Section from '../../components/Section/Section';
 import Div from '../../components/Div/Div';
-import Heading  from '../../components/Heading/Heading';
+import Heading from '../../components/Heading/Heading';
 
 export default function Settings() {
   const dispatch = useDispatch();
   const preferences = useSelector((state) => state.user.preferences);
 
   const handlePreferencesChange = (key, value) => {
-    dispatch(updatePreferences({
-      [key]: value
-    }));
+    dispatch(
+      updatePreferences({
+        [key]: value,
+      })
+    );
   };
 
   return (
@@ -23,7 +25,9 @@ export default function Settings() {
         <select
           id="postsPerPage"
           value={preferences.postsPerPage}
-          onChange={(e) => handlePreferencesChange('postsPerPage', parseInt(e.target.value))}
+          onChange={(e) =>
+            handlePreferencesChange('postsPerPage', parseInt(e.target.value))
+          }
         >
           <option value={5}>5</option>
           <option value={10}>10</option>
@@ -39,7 +43,9 @@ export default function Settings() {
         <select
           id="defaultSort"
           value={preferences.defaultSort}
-          onChange={(e) => handlePreferencesChange('defaultSort', e.target.value)}
+          onChange={(e) =>
+            handlePreferencesChange('defaultSort', e.target.value)
+          }
         >
           <option value="hot">Hot</option>
           <option value="new">New</option>
@@ -49,6 +55,5 @@ export default function Settings() {
         </select>
       </Div>
     </Section>
-  )
-
+  );
 }

@@ -1,23 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const loadInitialState = () => {
   try {
     const savedPreferences = localStorage.getItem('userPreferences');
     if (savedPreferences) {
       return {
-        preferences: JSON.parse(savedPreferences)
+        preferences: JSON.parse(savedPreferences),
       };
     }
   } catch (error) {
-    console.error("Failed to load user preferences:", error);
+    console.error('Failed to load user preferences:', error);
   }
   return {
     preferences: {
       postsPerPage: 10,
       defaultSort: 'hot',
-    }
+    },
   };
-}
+};
 
 const initialState = loadInitialState();
 
@@ -28,15 +28,18 @@ const userSlice = createSlice({
     updatePreferences(state, action) {
       state.preferences = {
         ...state.preferences,
-        ...action.payload
+        ...action.payload,
       };
       try {
-        localStorage.setItem('userPreferences', JSON.stringify(state.preferences));
+        localStorage.setItem(
+          'userPreferences',
+          JSON.stringify(state.preferences)
+        );
       } catch (error) {
-        console.error("Failed to save user preferences:", error);
+        console.error('Failed to save user preferences:', error);
       }
     },
-    
+
     resetPreferences(state) {
       state.preferences = {
         postsPerPage: 10,
@@ -45,10 +48,10 @@ const userSlice = createSlice({
       try {
         localStorage.removeItem('userPreferences');
       } catch (error) {
-        console.error("Failed to reset user preferences:", error);  
+        console.error('Failed to reset user preferences:', error);
       }
-    }
-  }
+    },
+  },
 });
 
 export const { updatePreferences, resetPreferences } = userSlice.actions;

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
-import Div from "../Div/Div";
-import styles from "./SearchBar.module.css";
+import Div from '../Div/Div';
+import styles from './SearchBar.module.css';
 
 export default function SearchBar() {
   const navigate = useNavigate();
@@ -17,13 +17,15 @@ export default function SearchBar() {
   return (
     <form onSubmit={handleSearch} className={styles.searchForm}>
       <Div className={styles.searchBar}>
-        <input 
-          type="search" 
+        <input
+          type="search"
           name="searchInput"
-          className={styles.searchInput} 
-          placeholder="Search..." 
+          className={styles.searchInput}
+          placeholder="Search..."
         />
-        <button type="submit" className={styles.searchButton}>Search</button>
+        <button type="submit" className={styles.searchButton}>
+          Search
+        </button>
       </Div>
     </form>
   );

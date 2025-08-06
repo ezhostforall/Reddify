@@ -5,17 +5,16 @@
   padding: var(--space-4);
   background-color: var(--surface);
   color: var(--text);
-  
+
   gap: var(--space-6);
 }
 
 .textLogo {
-  font-size: var(--text-h4);
+  font-size: var(--text-h1);
   font-weight: bold;
   color: var(--primary-500);
   text-decoration: none;
   text-shadow: var(--text-shadow-dark);
-  
 }
 
 .logoAccent {

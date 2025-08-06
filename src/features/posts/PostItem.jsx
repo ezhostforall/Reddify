@@ -1,5 +1,5 @@
-import Div from "../../components/Div/Div"
-import Heading from "../../components/Heading/Heading";
+import Div from '../../components/Div/Div';
+import Heading from '../../components/Heading/Heading';
 import styles from './posts.module.css';
 import { Link } from 'react-router';
 export default function PostItem({ post }) {
@@ -21,12 +21,11 @@ export default function PostItem({ post }) {
       <Heading className={styles.postTitle}>{post.title}</Heading>
       <Div className={styles.postMeta}>
         <p className={styles.metaText}>Posted by u/{post.author}</p>
-        <p className={styles.metaText}>👍 {post.score} | 💬 {post.num_comments}</p>
+        <p className={styles.metaText}>
+          👍 {post.score} | 💬 {post.num_comments}
+        </p>
       </Div>
-      <Link
-        to={`/post/${post.id}`}
-        className={styles.viewPostLink}
-      >
+      <Link to={`/post/${post.id}`} className={styles.viewPostLink}>
         View post →
       </Link>
     </Div>

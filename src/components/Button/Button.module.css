@@ -1,0 +1,35 @@
+.primary {
+  background-color: var(--primary-500);
+  color: var(--white);
+  border: none;
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.loadMore {
+  display: block;
+  margin: 0 auto;
+  background-color: var(--primary-500);
+  color: var(--white);
+  border: none;
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.backToTop {
+  position: fixed;
+  bottom: var(--space-7);
+  right: var(--space-4);
+  z-index: 1000;
+  background-color: var(--primary-500);
+  color: var(--white);
+  border: none;
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color var(--transition);
+}

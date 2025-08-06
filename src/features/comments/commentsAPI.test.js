@@ -6,15 +6,20 @@ describe('commentsAPI', () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
-        json: () => Promise.resolve([{ data: { children: [{ data: { id: 'c1', body: 'Test comment' } }] } }]),
+        json: () =>
+          Promise.resolve([
+            {
+              data: {
+                children: [{ data: { id: 'c1', body: 'Test comment' } }],
+              },
+            },
+          ]),
       })
     );
 
     const comments = await fetchComments(postId);
 
-    expect(fetch).toHaveBeenCalledWith(
-      expect.stringContaining(postId)
-    );
+    expect(fetch).toHaveBeenCalledWith(expect.stringContaining(postId));
     expect(comments[0].data.children[0].data.body).toBe('Test comment');
   });
 });
