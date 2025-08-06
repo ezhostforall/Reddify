@@ -1,5 +1,6 @@
 export async function fetchSubredditPosts(subreddit, sort = 'hot', limit = 10, after = '') {
   const url = `https://www.reddit.com/r/${subreddit}/${sort}.json?limit=${limit}&after=${after}`;
+  console.log('Fetching:', url); // Debug log
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch /r/${subreddit}: ${response.status}`);
@@ -28,14 +29,32 @@ export async function fetchSearchResults(query, sort = 'relevance', limit = 10, 
   return json.data; // Contains `children`, `after`, `before`
 }
 
+// Helper function to get user preferences from localStorage
+function getUserPreferences() {
+  try {
+    const saved = localStorage.getItem('userPreferences');
+    if (saved) {
+      return JSON.parse(saved);
+    }
+  } catch (error) {
+    console.error('Error loading preferences:', error);
+  }
+  return { postsPerPage: 10, defaultSort: 'hot' };
+}
+
 export async function postsListLoader({ params, request }) {
   const url = new URL(request.url);
   const after = url.searchParams.get('after') || '';
   const subreddit = params.subreddit || 'all';
   
-  console.log('Loading posts with after:', after); // Debug log
+  // Get user preferences for limit and sort
+  const preferences = getUserPreferences();
+  const limit = parseInt(url.searchParams.get('limit') || preferences.postsPerPage);
+  const sort = url.searchParams.get('sort') || preferences.defaultSort;
   
-  const data = await fetchSubredditPosts(subreddit, 'hot', 10, after);
+  console.log('Loading posts with:', { subreddit, sort, limit, after, preferences }); // Debug log
+  
+  const data = await fetchSubredditPosts(subreddit, sort, limit, after);
   return { posts: data.children, after: data.after, subreddit };
 }
 
@@ -58,7 +77,10 @@ export async function searchLoader({ request }) {
   }
   
   try {
-    const data = await fetchSearchResults(query, 'relevance', 10, after);
+    const preferences = getUserPreferences();
+    const limit = parseInt(url.searchParams.get('limit') || preferences.postsPerPage);
+    
+    const data = await fetchSearchResults(query, 'relevance', limit, after);
     return { posts: data.children, after: data.after, query };
   } catch (error) {
     return { posts: [], after: null, query, error: error.message };

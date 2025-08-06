@@ -1,10 +1,18 @@
+import { useSelector } from 'react-redux';
 import Section from '../../components/Section/Section';
 import PostsList from '../../features/posts/PostsList';
 
 export default function Home() {
+  const { postsPerPage, defaultSort } = useSelector((state) => state.user.preferences);
+
+  console.log(postsPerPage, defaultSort)
+
   return (
     <Section>
-      <PostsList subreddit="all" sort="hot" limit={10} after="" />
+      <PostsList 
+        title="Browse Posts"
+        showFilter={true}
+      />
     </Section>
   );
 }

@@ -1,0 +1,110 @@
+.postsFilter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--surface);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.filterLabel {
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.filterSelect {
+  padding: var(--space-2) var(--space-3);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: var(--text-base);
+  cursor: pointer;
+  transition: var(--transition);
+  min-width: 120px;
+}
+
+.filterSelect:hover {
+  border-color: var(--primary-300);
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+}
+
+.filterInfo {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.activeFilters {
+  font-size: var(--text-small);
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .postsFilter {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .filterGroup {
+    justify-content: space-between;
+  }
+
+  .filterInfo {
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .filterSelect {
+    min-width: auto;
+    flex: 1;
+  }
+}
+
+/* Compact variant */
+.postsFilter.compact {
+  padding: var(--space-2) var(--space-3);
+  gap: var(--space-3);
+}
+
+.postsFilter.compact .filterLabel {
+  display: none;
+}
+
+.postsFilter.compact .filterSelect {
+  min-width: 100px;
+  font-size: var(--text-small);
+}
+
+.postsFilter.compact .activeFilters {
+  display: none;
+}
+
+/* Theme-specific styles */
+[data-theme='dark'] .filterSelect {
+  background-color: var(--surface);
+}
+
+[data-theme='dark'] .filterSelect option {
+  background-color: var(--surface);
+  color: var(--text);
+}

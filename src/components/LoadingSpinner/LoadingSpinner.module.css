@@ -1,0 +1,132 @@
+.loadingSpinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid var(--primary-500);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Size variants */
+.small .spinner {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+.medium .spinner {
+  width: 40px;
+  height: 40px;
+  border-width: 4px;
+}
+
+.large .spinner {
+  width: 60px;
+  height: 60px;
+  border-width: 6px;
+}
+
+/* Color variants */
+.primary .spinner {
+  border-top-color: var(--primary-500);
+}
+
+.secondary .spinner {
+  border-top-color: var(--secondary-color);
+}
+
+.success .spinner {
+  border-top-color: var(--success-color);
+}
+
+.warning .spinner {
+  border-top-color: var(--warning-color);
+}
+
+.danger .spinner {
+  border-top-color: var(--danger-color);
+}
+
+.white .spinner {
+  border-color: rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+}
+
+.dark .spinner {
+  border-color: rgba(0, 0, 0, 0.1);
+  border-top-color: var(--text);
+}
+
+/* Animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Centered spinner for full-page loading */
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Inline spinner for buttons */
+.inline {
+  display: inline-flex;
+  vertical-align: middle;
+  margin-right: var(--space-2);
+}
+
+/* Loading overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--surface);
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.overlay.dark {
+  background-color: var(--surface-inverse);
+}
+
+/* Theme-aware spinner borders for better visibility */
+[data-theme='light'] .spinner {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .spinner {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Centered spinner backdrop for theme awareness */
+[data-theme='light'] .centered {
+  background-color: rgba(242, 242, 247, 0.8); /* var(--bg) with opacity */
+}
+
+[data-theme='dark'] .centered {
+  background-color: rgba(28, 28, 30, 0.8); /* var(--bg) with opacity */
+}

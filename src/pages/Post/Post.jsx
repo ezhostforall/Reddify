@@ -43,7 +43,7 @@ function PostContent({ post }) {
 
   if (post.is_self && post.selftext_html) {
     return (
-      <Div
+      <div
         dangerouslySetInnerHTML={{ 
           __html: post.selftext_html.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
         }} 

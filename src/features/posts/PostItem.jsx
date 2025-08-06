@@ -24,7 +24,7 @@ export default function PostItem({ post }) {
         <p className={styles.metaText}>👍 {post.score} | 💬 {post.num_comments}</p>
       </Div>
       <Link
-        to={`post/${post.id}`}
+        to={`/post/${post.id}`}
         className={styles.viewPostLink}
       >
         View post →

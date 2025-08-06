@@ -1,14 +1,8 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit';
-
-const dummySlice = createSlice({
-  name: 'dummy',
-  initialState: {},
-  reducers: {},
-});
-
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from '../features/user/userSlice'
 const store = configureStore({
   reducer: {
-    dummy: dummySlice.reducer,
+    user: userReducer,
   },
 });
 

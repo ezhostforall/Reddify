@@ -13,8 +13,8 @@ export default function Header() {
         <NavLink to="/" className={styles.navLink}>
           Home
         </NavLink>
-        <NavLink to="/search" className={styles.navLink}>
-          Search
+        <NavLink to="/settings" className={styles.navLink}>
+          Settings
         </NavLink>
       </nav>
     </header>
