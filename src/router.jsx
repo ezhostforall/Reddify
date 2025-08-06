@@ -3,7 +3,7 @@ import App from './App.jsx';
 import Home from './pages/Home/Home.jsx';
 import Post from './pages/Post/Post.jsx';
 import Search from './pages/Search/Search.jsx';
-import { postsListLoader, postDetailsLoader } from './features/posts/postsAPI.js';
+import { postsListLoader, postDetailsLoader, searchLoader } from './features/posts/postsAPI.js';
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +23,7 @@ export const router = createBrowserRouter([
       {
         path: 'search',
         element: <Search />,
+        loader: searchLoader,
       },
     ],
   },

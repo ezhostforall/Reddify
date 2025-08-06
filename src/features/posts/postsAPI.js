@@ -18,6 +18,16 @@ export async function fetchPostDetails(postId) {
   return json[0].data.children[0].data; // Returns the post details
 }
 
+export async function fetchSearchResults(query, sort = 'relevance', limit = 10, after = '') {
+  const url = `https://www.reddit.com/search.json?q=${encodeURIComponent(query)}&sort=${sort}&limit=${limit}&after=${after}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to search for "${query}": ${response.status}`);
+  }
+  const json = await response.json();
+  return json.data; // Contains `children`, `after`, `before`
+}
+
 export async function postsListLoader({ params, request }) {
   const url = new URL(request.url);
   const after = url.searchParams.get('after') || '';
@@ -36,4 +46,21 @@ export async function postDetailsLoader({ params }) {
   }
   const postDetails = await fetchPostDetails(postId);
   return { post: postDetails };
+}
+
+export async function searchLoader({ request }) {
+  const url = new URL(request.url);
+  const query = url.searchParams.get('q');
+  const after = url.searchParams.get('after') || '';
+  
+  if (!query) {
+    return { posts: [], after: null, query: '', error: 'No search query provided' };
+  }
+  
+  try {
+    const data = await fetchSearchResults(query, 'relevance', 10, after);
+    return { posts: data.children, after: data.after, query };
+  } catch (error) {
+    return { posts: [], after: null, query, error: error.message };
+  }
 }

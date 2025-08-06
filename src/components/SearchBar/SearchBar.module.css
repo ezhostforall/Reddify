@@ -1,3 +1,6 @@
+.searchForm {
+  width: 100%;
+}
 .searchBar {
   display: flex;
   align-items: stretch; /* ensures both input and button have the same height */
