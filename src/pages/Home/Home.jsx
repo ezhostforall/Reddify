@@ -1,5 +1,6 @@
 import Section from '../../components/Section/Section';
 import PostsList from '../../features/posts/PostsList';
+
 export default function Home() {
   return (
     <Section>

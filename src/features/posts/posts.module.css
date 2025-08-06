@@ -68,3 +68,17 @@
   color: var(--primary-900);
   background-color: var(--primary-50);
 }
+
+@media (max-width: 768px) {
+  .post {
+    padding: var(--space-2);
+  }
+
+  .video, .image {
+    height: 300px;
+  }
+
+  .postTitle {
+    font-size: var(--text-h5);
+  }
+}
