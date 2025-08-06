@@ -4,6 +4,7 @@ import { fetchSubredditPosts } from './postsAPI';
 import Section from '../../components/Section/Section';
 import Div from '../../components/Div/Div';
 import Heading from '../../components/Heading/Heading';
+import PostItem from './PostItem';
 import styles from './posts.module.css';
 
 export default function PostsList({ subreddit = 'all' }) {
@@ -44,29 +45,7 @@ export default function PostsList({ subreddit = 'all' }) {
     <>
       <Section variant='left-aligned-flex' className={styles.postsFeed}> 
         {posts.map(({ data: post }) => (
-          <Div className={styles.post} key={post.id}>
-            {post.media?.reddit_video?.fallback_url ? (
-              <video controls className={styles.video}>
-                <source src={post.media.reddit_video.fallback_url} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            ) : post.preview?.images?.[0]?.source?.url ? (
-              <img
-                src={post.preview.images[0].source.url.replace(/&amp;/g, '&')}
-                alt={post.title}
-                loading="lazy"
-                className={styles.image}
-              />
-            ) : null}
-            <Heading>{post.title}</Heading>
-            <p>Posted by u/{post.author}</p>
-            <p>👍 {post.score} | 💬 {post.num_comments}</p>
-            <Link
-              to={`post/${post.id}`}
-            >
-              View post →
-            </Link>
-          </Div>
+          <PostItem key={post.id} post={post} />
         ))}
       </Section>
       <Section>
