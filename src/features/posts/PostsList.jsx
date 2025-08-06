@@ -1,38 +1,76 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchSubredditPosts } from './postsAPI';
 
-export default function PostsList({ subreddit, sort = 'hot', limit = 10, after = '' }) {
-  // This component will use fetchSubredditPosts to get posts and render them
-  // Implementation details would go here
+export default function PostsList({ subreddit = 'reactjs' }) {
   const [posts, setPosts] = useState([]);
+  const [after, setAfter] = useState('');
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchSubredditPosts(subreddit, sort, limit, after);
-        setPosts(data.data.children.map(child => child.data));
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    setLoading(true);
+    fetchSubredditPosts(subreddit, 'hot', 10, '')
+      .then(data => {
+        setPosts(data.children);
+        setAfter(data.after);
+      })
+      .catch(err => {
+        console.error('Failed to fetch posts:', err);
+      })
+      .finally(() => setLoading(false));
+  }, [subreddit]);
 
-    fetchData();
-  }, [subreddit, sort, limit, after]);
+  const loadMorePosts = () => {
+    if (!after) return;
+    setLoading(true);
+    fetchSubredditPosts(subreddit, 'hot', 10, after)
+      .then(data => {
+        setPosts(prevPosts => [...prevPosts, ...data.children]);
+        setAfter(data.after);
+      })
+      .catch(err => {
+        console.error('Failed to load more posts:', err);
+      })
+      .finally(() => setLoading(false));
+  };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
-  console.log(posts); // For debugging purposes
+  if (loading && posts.length === 0) return <p>Loading posts...</p>;
 
   return (
-    <ul>
-      {posts.map(post => (
-        <li key={post.id}>{post.title}</li>
-      ))}
-    </ul>
+    <>
+      <ul>
+        {posts.map(({ data: post }) => (
+          <li key={post.id}>
+            {post.media?.reddit_video?.fallback_url ? (
+              <video controls>
+                <source src={post.media.reddit_video.fallback_url} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            ) : post.preview?.images?.[0]?.source?.url ? (
+              <img
+                src={post.preview.images[0].source.url.replace(/&amp;/g, '&')}
+                alt={post.title}
+                loading="lazy"
+              />
+            ) : null}
+            <h2>{post.title}</h2>
+            <p>Posted by u/{post.author}</p>
+            <p>👍 {post.score} | 💬 {post.num_comments}</p>
+            <a
+              href={`https://reddit.com${post.permalink}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              View on Reddit →
+            </a>
+          </li>
+        ))}
+      </ul>
+      {after && (
+        <button type="button" onClick={loadMorePosts} disabled={loading}>
+          {loading ? 'Loading...' : 'Load More Posts'}
+        </button>
+      )}
+      {!after && posts.length > 0 && <p>No more posts to load.</p>}
+    </>
   );
 }
