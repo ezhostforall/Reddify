@@ -5,3 +5,12 @@
 .secondary {
   display: block;
 }
+
+
+.left-aligned-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  gap: var(--space-4);
+}
